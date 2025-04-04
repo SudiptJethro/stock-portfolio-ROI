@@ -32,7 +32,7 @@ if st.button("Calculate"):
         st.error("Please ensure 5 unique tickers and that weights sum to 1.0")
     else:
         try:
-            data = yf.download(tickers, start=start_date, end=end_date)['Adj Close'].dropna()
+            data = yf.download(tickers, start=start_date, end=end_date,auto_adjust=False)['Adj Close'].dropna()
             normalized_prices = data / data.iloc[0]
             allocated = normalized_prices * weights * amount_invested
             portfolio_value = allocated.sum(axis=1)
